@@ -1,0 +1,60 @@
+.success-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #c3c9e1 0%, #3d5d95 100%);
+  }
+  
+  .success-card {
+    width: 380px;
+    text-align: center;
+    padding: 20px;
+    border-radius: 12px;
+    background:linear-gradient(135deg, rgb(247, 244, 244), #aeb7ed 100%);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .success-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .success-icon {
+    font-size: 80px;
+    color: #4caf50;
+  }
+  
+  .success-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  .success-message {
+    font-size: 16px;
+    color: #666;
+    margin: 15px 0;
+  }
+  
+  .action-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  

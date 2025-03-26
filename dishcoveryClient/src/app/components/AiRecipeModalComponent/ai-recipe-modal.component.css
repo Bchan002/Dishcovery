@@ -1,0 +1,82 @@
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 16px 8px;
+  scroll-snap-type: x mandatory;
+}
+
+.horizontal-card {
+  min-width: 240px;
+  max-width: 240px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.horizontal-card:hover {
+  transform: translateY(-5px);
+}
+
+.horizontal-card img {
+  height: 160px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* More specific selectors to override Material styles */
+.horizontal-card mat-card-title, 
+.horizontal-card .mat-mdc-card-title {
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  margin: 12px 16px 4px 16px !important; /* top, right, bottom, left */
+  line-height: 1.2 !important;
+}
+
+.horizontal-card ::ng-deep .mat-mdc-card-title {
+  font-size: 12px !important;
+}
+
+mat-card-subtitle {
+  font-size: 13px;
+  color: #666;
+  margin: 0 16px 8px 16px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 8px 8px;
+}
+
+.modal-title {
+  margin-top: 12px;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+}
+
+mat-dialog-content {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+mat-spinner {
+  width: 48px !important;
+  height: 48px !important;
+  margin-bottom: 12px;
+}
+
+
+  
+  
+  

@@ -1,0 +1,104 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #c3c9e1 0%, #3d5d95 100%);
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    background:linear-gradient(135deg, rgb(247, 244, 244), #aeb7ed 100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .login-card:hover {
+    transform: scale(1.01);
+  }
+  
+  mat-card-title {
+    text-align: center;
+  }
+  
+  mat-card-title h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #3f51b5;
+    margin: 0 0 4px;
+  }
+  
+  mat-card-title h2 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #777;
+  }
+  
+  .full-width {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  mat-icon-button {
+    margin-left: 4px;
+  }
+  
+  .error-message {
+    text-align: center;
+    color: #d32f2f;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 12px;
+    background-color: rgba(211, 47, 47, 0.15);
+    border-radius: 6px;
+  }
+  
+  
+  .button-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+  }
+  
+  button[mat-raised-button] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+  
+  .card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 12px;
+  }
+  
+  .card-actions button {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+  }
+  
+  mat-icon {
+    margin-right: 6px;
+  }
+  
+  @media (max-width: 480px) {
+    .login-card {
+      padding: 16px;
+    }
+  
+    mat-card-title h1 {
+      font-size: 26px;
+    }
+  }
+  
+    

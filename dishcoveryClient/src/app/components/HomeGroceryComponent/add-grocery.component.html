@@ -1,0 +1,134 @@
+<div class="grocery-page">
+    <h1 class="grocery-title">Home Grocery Tracker</h1>
+    
+    <form [formGroup]="groceryForm" (submit)="addGroceryItem()">
+      <div class="grocery-container">
+        <!-- Left Side: Form Inputs -->
+        <mat-card class="grocery-form-card">
+          <mat-card-header>
+            <mat-card-title>Add Grocery Item</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="form-grid">
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Grocery Item</mat-label>
+                <input matInput type="text" formControlName="name" placeholder="Enter item name">
+                <mat-icon matSuffix>shopping_cart</mat-icon>
+              </mat-form-field>
+              
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Quantity</mat-label>
+                <input matInput type="number" formControlName="quantity" placeholder="Enter quantity">
+                <mat-icon matSuffix>exposure</mat-icon>
+              </mat-form-field>
+            
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Category</mat-label>
+                <mat-select formControlName="category">
+                  <mat-option value="dairy">Dairy</mat-option>
+                  <mat-option value="meat">Meat</mat-option>
+                  <mat-option value="fruit">Fruit</mat-option>
+                  <mat-option value="vegetable">Vegetable</mat-option>
+                  <mat-option value="bakery">Bakery</mat-option>
+                  <mat-option value="canned">Canned</mat-option>
+                  <mat-option value="others">Others</mat-option>
+                </mat-select>
+                <mat-icon matSuffix>category</mat-icon>
+              </mat-form-field>
+              
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Expiration Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="expirationDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            
+            @if(groceryForm.errors?.['pastDueDate'] || 
+                (isCtrlInvalid('name') && groceryForm.get('name')?.touched) || 
+                (isCtrlInvalid('quantity') && groceryForm.get('quantity')?.touched)){
+              <mat-card class="error-card">
+                <ul class="error-messages">
+                  @if(groceryForm.errors?.['pastDueDate']){
+                    <li><mat-icon>error_outline</mat-icon> Date cannot be in the past</li>
+                  }
+                  @if(isCtrlInvalid('name') && groceryForm.get('name')?.touched){
+                    <li><mat-icon>error_outline</mat-icon> Please enter an item name</li>
+                  }
+                  @if(isCtrlInvalid('quantity') && groceryForm.get('quantity')?.touched){
+                    <li><mat-icon>error_outline</mat-icon> Please enter a valid quantity (not negative)</li>
+                  }
+                </ul>
+              </mat-card>
+            }
+            
+            <div class="button-container">
+              <button mat-raised-button color="primary" type="submit" [disabled]="disableButton()">
+                <mat-icon>add_circle</mat-icon>
+                Add Item
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        
+        <!-- Right Side: Grocery List -->
+        <mat-card class="grocery-list-card">
+          <mat-card-header>
+            <mat-card-title>My Grocery Store</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            @if(groceryArray.length < 1){
+              <div class="empty-state">
+                <mat-icon class="empty-icon">receipt_long</mat-icon>
+                <h2 class="no-items">No groceries added</h2>
+                <p>Add some items to your grocery store</p>
+              </div>
+            } @else {
+              <div class="table-container">
+                <table class="grocery-table">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Quantity</th>
+                      <th>Category</th>
+                      <th>Exp. Date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for(groceryItem of groceryArray; let idx = $index; track groceryItem){
+                      <tr>
+                        <td>{{groceryItem.itemName}}</td>
+                        <td>{{groceryItem.quantity}}</td>
+                        <td class="category-cell">
+                          <span class="category-badge {{groceryItem.category}}">
+                            {{groceryItem.category}}
+                          </span>
+                        </td>
+                        <td>{{groceryItem.expirationDate}}</td>
+                        <td>
+                          <button mat-icon-button color="warn" type="button" (click)="removeItem(idx)" aria-label="Delete item">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+              
+              <div class="button-container save-button-container">
+                <button mat-raised-button color="accent" type="button" (click)="saveGroceryItem()">
+                  <mat-icon>save</mat-icon>
+                  Save List
+                </button>
+              </div>
+            }
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </form>
+  </div>
+
+
+

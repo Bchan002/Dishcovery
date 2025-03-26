@@ -1,0 +1,47 @@
+@if(isLoading) {
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>Loading best deals...</p>
+    </div>
+  }
+  
+  @if(!isLoading && priceCompareResult) {
+    <div>
+      @for(ingredient of getIngredients(priceCompareResult); let idx=$index; track idx) {
+        <div>
+          <h3>{{ ingredient | titlecase }}</h3>
+          
+          @if(priceCompareResult[ingredient].length > 0) {
+            <div class="product-list">
+              @for(item of priceCompareResult[ingredient]; track item) {
+                <div class="product-card">
+                  <img [src]="item.imageUrl" alt="{{item.productName}}" onerror="this.src='assets/placeholder-food.jpg'">
+                  <p><strong>{{ item.productName }}</strong></p>
+                  <p>Price: ${{ item.productPrice | number:'1.2-2' }}</p>
+                  @if(item.offer === 'Yes') {
+                    <p class="highlight">🔥 On Offer</p>
+                  }
+                  <a [href]="item.productUrl" target="_blank">View Product</a>
+                </div>
+              }
+            </div>
+          } @else {
+            <div class="no-results-container">
+              <div class="no-results-icon">🔍</div>
+              <p class="no-results-message">No products found for this ingredient</p>
+              <p class="no-results-suggestion">Try checking the Fairprice website
+               
+              </p>
+              <a href="https://www.fairprice.com.sg/" target="_blank">Visit FairPrice</a>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+  
+  @if(!isLoading && (!priceCompareResult || getIngredients(priceCompareResult).length === 0)) {
+    <div class="loading-container">
+      <p>No ingredients found. Try searching for different items.</p>
+    </div>
+  }

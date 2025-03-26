@@ -1,0 +1,30 @@
+<h1>Here are your Saved Recipes</h1>
+
+<div class="recipe-container">
+  @if(savedRecipe$ | async; as results){
+    @if(results.length > 0){
+      @for(recipe of results; track recipe.recipeId){
+        <a [routerLink]="['/layout/savedRecipeDetails', recipe.recipeId]">
+          <mat-card>
+            <button mat-icon-button class="delete-button" (click)="deleteRecipe($event, recipe.recipeId)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <div class="image-wrapper">
+              <img mat-card-image [src]="recipe.image" alt="{{ recipe.title }}">
+            </div>
+            <mat-card-content>
+              <h2>{{ recipe.title }}</h2>
+              <p><strong>Ready in:</strong> {{ recipe.readyInMinutes }} minutes</p>
+              <p><strong>Servings:</strong> {{ recipe.servings }}</p>
+            </mat-card-content>
+          </mat-card>
+        </a>
+      }
+    } @else {
+      <h2>No saved recipe found!</h2>
+    }
+  } @else {
+    <h2>Loading recipes...</h2>
+  }
+</div>
+

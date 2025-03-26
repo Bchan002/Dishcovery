@@ -1,0 +1,39 @@
+<!-- Main container -->
+<!-- Main container -->
+<div [ngClass]="{'sidenav-open': sidenavOpened}">
+    <mat-sidenav-container>
+      <!-- Sidenav -->
+      <mat-sidenav #sidenav mode="side" [opened]="sidenavOpened" style="width: 250px;">
+        <!-- Your sidenav content -->
+      </mat-sidenav>
+      
+      <!-- Main content -->
+      <mat-sidenav-content>
+        <div class="content-wrapper">
+          <!-- Recipe search component -->
+          <div class="search-container">
+            <h1 class="search-title">Find Your Favorite Recipe</h1>
+            
+            <form [formGroup]="recipeForm" (submit)="searchRecipe()" class="search-form">
+              <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Search for a Recipe</mat-label>
+                <input matInput type="text" formControlName="query" placeholder="Enter recipe name or ingredient">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+              
+              <button mat-raised-button color="primary" class="search-button" type="submit">
+                <mat-icon>restaurant_menu</mat-icon>
+                <span>Find Recipes</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  
+  
+  
+  
+  
+

@@ -1,0 +1,43 @@
+<h1 class="shopping-list-heading" style="text-align: center;">Here is your shopping list</h1>
+
+<div class="shopping-list-wrapper">
+  <div *ngFor="let item of shoppingList; let i = index" class="shopping-item-card">
+    <!-- Header/Title Bar -->
+    <div class="item-header" (click)="toggle(i)">
+      <div class="item-title">
+        <img [src]="item.recipeImage" [alt]="item.recipeName" class="recipe-image">
+        <span class="recipe-name">{{ item.recipeName }}</span>
+      </div>
+      
+      <div class="item-actions">
+        <button mat-button color="primary" (click)="$event.stopPropagation(); comparePrices(i)">
+          Compare Ingredient Prices
+        </button>
+        <button mat-icon-button color="warn" (click)="$event.stopPropagation(); deleteItem(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        
+        <mat-icon class="expand-icon" [ngClass]="{'rotated': expandedIndex === i}">
+          chevron_right
+        </mat-icon>
+      </div>
+    </div>
+    
+    <!-- Expandable Content -->
+    <div class="item-content" *ngIf="expandedIndex === i">
+      <h4 class="ingredients-heading">Ingredients:</h4>
+      <ul class="ingredients-list">
+        <li *ngFor="let ingredient of item.ingredients" class="ingredient-item">
+          <mat-icon class="check-icon">check_circle</mat-icon>
+          <span>{{ ingredient }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- Empty State -->
+  <div *ngIf="shoppingList.length === 0" class="empty-list">
+    <mat-icon class="empty-icon">shopping_cart</mat-icon>
+    <p>Your shopping list is empty</p>
+  </div>
+</div>

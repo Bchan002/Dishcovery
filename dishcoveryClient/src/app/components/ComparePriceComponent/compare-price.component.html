@@ -1,0 +1,46 @@
+<mat-dialog-content class="dialog-padding">
+    <h3>Set your budget range to find the best deals</h3>
+  
+    <form *ngIf="form" [formGroup]="form">
+      <div class="price-inputs">
+        <mat-form-field appearance="outline">
+            <mat-label>$ Min Price</mat-label>
+            <input matInput type="string" formControlName="minPrice" placeholder="0.00">
+            @if(isCtrlInvalid('minPrice')){
+                <mat-error>
+                  Please enter a valid min price
+                </mat-error>
+              }
+          </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>$ Maximum Price</mat-label>
+          <input matInput type="string" formControlName="maxPrice">
+          @if(isCtrlInvalid('maxPrice')){
+            <mat-error>
+              Please enter a valid max price
+            </mat-error>
+          }
+        </mat-form-field>
+      </div>
+  
+      <div *ngIf="form.hasError('invalidPriceRange')" class="range-error">
+        Maximum price must be greater than minimum price
+      </div>
+    </form>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="onCompare()" [disabled]="disabled()">
+      Find Deals
+    </button>
+  </mat-dialog-actions>
+
+ 
+
+  
+
+  
+ 
+

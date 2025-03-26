@@ -1,0 +1,44 @@
+
+
+@if(recipe$|async; as recipe) {
+    <div class="recipe-container">
+      <h1 class="recipe-title">{{ recipe.title }}</h1>
+      
+      <div class="recipe-header">
+        <img [src]="recipe.image" alt="{{ recipe.title }}" class="recipe-image">
+        <div class="recipe-meta">
+          <div class="meta-item">
+            <i class="meta-icon">⏱️</i>
+            <span>{{ recipe.readyInMinutes }} minutes</span>
+          </div>
+          <div class="meta-item">
+            <i class="meta-icon">👥</i>
+            <span>{{ recipe.servings }} servings</span>
+          </div>
+          <button class="save-button" (click)="saveRecipe(recipe)">
+            <i class="button-icon">❤️</i> Save Recipe
+          </button>
+        </div>
+      </div>
+      
+      <div class="recipe-sections">
+        <div class="recipe-section ingredients-section">
+          <h2 class="section-title">Ingredients</h2>
+          <ul class="ingredients-list">
+            @for (ingredient of recipe.ingredients; let index=$index; track index) {
+              <li class="ingredient-item">
+                <span class="ingredient-amount">{{ ingredient.amount }} {{ ingredient.unit }}</span>
+                <span class="ingredient-name">{{ ingredient.name }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+        
+        <div class="recipe-section instructions-section">
+          <h2 class="section-title">Instructions</h2>
+          <div class="instructions-content" [innerHTML]="recipe.instructions"></div>
+        </div>
+      </div>
+    </div>
+  }
+

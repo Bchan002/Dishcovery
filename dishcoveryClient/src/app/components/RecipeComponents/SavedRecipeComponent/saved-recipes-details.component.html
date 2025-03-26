@@ -1,0 +1,56 @@
+
+@if(recipe$|async; as recipe) {
+    <div class="recipe-container">
+      <h1 class="recipe-title">{{ recipe.title }}</h1>
+      
+      <div class="recipe-header">
+        <img [src]="recipe.image" alt="{{ recipe.title }}" class="recipe-image">
+        <div class="recipe-meta">
+          <div class="meta-item">
+            <i class="meta-icon">⏱️</i>
+            <span>{{ recipe.readyInMinutes }} minutes</span>
+          </div>
+          <div class="meta-item">
+            <i class="meta-icon">👥</i>
+            <span>{{ recipe.servings }} servings</span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="recipe-sections">
+        <div class="recipe-section ingredients-section">
+          <h2 class="section-title">Ingredients</h2>
+      
+       
+          <form [formGroup]="form" (submit)="addToShoppingList(recipe.title,recipe.image)">  
+            <ul class="ingredients-list" formArrayName="ingredientList">
+              @for (ingredientCtrl of ingredientList.controls; let idx=$index; track idx) {
+                <li [formGroupName]="idx" class="ingredient-item"> 
+                  <input type="checkbox" formControlName="selected"/>
+                  <span class="ingredient-name">{{ ingredientCtrl.value.name }}</span>
+                  <span class="ingredient-amount">{{ ingredientCtrl.value.amount }} {{ ingredientCtrl.value.unit }}</span>
+                </li>
+              }
+            </ul>
+            <br>
+              <button type="submit" class="add-to-grocery-btn">
+                <span class="button-icon">🛒</span> Add to Shopping List
+              </button>
+
+          </form>
+        </div>
+        
+        <div class="recipe-section instructions-section">
+          <h2 class="section-title">Instructions</h2>
+          <div class="instructions-content" [innerHTML]="recipe.instructions"></div>
+        </div>
+      </div>
+    </div>
+  }
+
+
+
+
+
+

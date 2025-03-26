@@ -1,0 +1,157 @@
+/* 🧃 Ingredient Section Titles */
+h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 2rem 0 1rem;
+    color: #3f51b5;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0.4rem;
+  }
+  
+  /* 🧩 Card Container */
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* 🧊 Product Card Layout - vertical */
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 14px;
+    background-color: white;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+    max-width: 320px;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 🖼️ Image at top */
+  .product-card img {
+    border-radius: 10px;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* 📝 Product content */
+  .product-card p {
+    margin: 2px 0;
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.4;
+  }
+  
+  .product-card strong {
+    font-weight: 600;
+    color: #222;
+  }
+  
+  /* 🔥 Offer tag */
+  .highlight {
+    background: #ffe4ec;
+    color: #d81b60;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 6px;
+  }
+  
+  /* 🔗 Product link */
+  .product-card a {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #3f51b5;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .product-card a:hover {
+    text-decoration: underline;
+    color: #1a237e;
+  }
+  
+  /* ❌ No Results Styling */
+  .no-results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    margin: 1rem auto;
+    max-width: 500px;
+    background-color: #f9f9fb;
+    border-radius: 12px;
+    border: 1px dashed #d0d0e0;
+    text-align: center;
+    animation: fadeIn 0.4s ease-in-out;
+  }
+  
+  .no-results-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #9e9eb3;
+    animation: pulse 2s infinite;
+  }
+  
+  .no-results-message {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #5c5c7b;
+    margin-bottom: 0.5rem;
+  }
+  
+  .no-results-suggestion {
+    font-size: 0.95rem;
+    color: #8e8ea0;
+    line-height: 1.4;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+  }
+  
+  /* 🌀 Loading state */
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+    color: #666;
+    animation: fadeIn 0.4s ease-in-out;
+  }
+  
+  .loading-container p {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #555;
+  }
+  
+  mat-spinner {
+    width: 48px !important;
+    height: 48px !important;
+    margin-bottom: 12px;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }

@@ -1,0 +1,35 @@
+<h1>Here is your saved Grocery </h1>
+
+@if(groceryItem$ | async; as results){
+    @if(results.length > 0){
+       
+        <table border="1">
+            <thead>
+                <tr>
+                    <td>Item Name</td>
+                    <td>Quantity</td>
+                    <td>Category</td>
+                    <td>Expiration Date</td>
+                    <td>Remove</td>
+                </tr>
+            </thead>
+        @for(grocery of results; track grocery.itemId){
+            <tbody>
+                <td>{{grocery.itemName}}</td>
+                <td>{{grocery.quantity}}</td>
+                <td>{{grocery.category}}</td>
+                <td>{{grocery.expirationDate}}</td>
+                <td>
+                    <button type="button" (click)="deleteGrocery(grocery.itemId)">X</button>
+                </td>
+            </tbody>
+        }
+        </table>
+      
+    } @else {
+      <h2>No saved Grocery found!</h2>
+    }
+  } @else {
+    <h2>Loading Grocery...</h2>
+  }
+

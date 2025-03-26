@@ -1,0 +1,22 @@
+<h1>Breakfast Recipes</h1>
+
+<div class="recipe-container">
+  <!--Using Asyn Pipe-->
+  @if(breakfastRecipe$ | async; as results){
+
+    @for(recipe of results; track recipe.recipeId){
+      <a [routerLink]="['/layout/recipe', recipe.recipeId]">
+        <mat-card>
+            <img mat-card-image [src]="recipe.image" alt="{{ recipe.title }}">
+            <mat-card-content>
+              <h2>{{ recipe.title }}</h2>
+              <p><strong>Ready in:</strong> {{ recipe.readyInMinutes }} minutes</p>
+              <p><strong>Servings:</strong> {{ recipe.servings }}</p>
+            </mat-card-content>
+        </mat-card>
+  
+      </a>
+    }
+
+  }
+</div>

@@ -1,0 +1,34 @@
+<h1>Searched Recipe</h1>
+
+<div *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+  
+
+<div class="recipe-container">
+
+  <!--Using Asyn Pipe-->
+  @if(searchedRecipe$ | async; as results){
+
+    @for(recipe of results; track recipe.recipeId){
+      <a [routerLink]="['/layout/searchRecipeDetails', recipe.recipeId]">
+        <mat-card>
+            <img mat-card-image [src]="recipe.image" alt="{{ recipe.title }}">
+            <mat-card-content>
+              <h2>{{ recipe.title }}</h2>
+              <p><strong>Ready in:</strong> {{ recipe.readyInMinutes }} minutes</p>
+              <p><strong>Servings:</strong> {{ recipe.servings }}</p>
+            </mat-card-content>
+        </mat-card>
+  
+      </a>
+    }
+
+  }
+</div>
+
+
+  <div *ngIf="errorMessage$ | async as error" class="alert alert-danger">
+    {{ error }}
+  </div>
+

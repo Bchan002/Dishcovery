@@ -1,0 +1,82 @@
+<div class="sign-up-container">
+    <mat-card class="sign-up-card">
+      <mat-card-header>
+        <mat-card-title>
+          <h1>Sign Up</h1>
+        </mat-card-title>
+      </mat-card-header>
+  
+      <mat-card-content>
+        <form [formGroup]="signUpForm" (submit)="processSignUpForm()">
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" formControlName="username">
+            <mat-icon matPrefix>person</mat-icon>
+            @if(isCtrlInvalid('username') && signUpForm.get('username')?.touched){
+              <mat-error>
+                Please enter a valid username (min 5 letters)
+              </mat-error>
+            }
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+            <mat-icon matPrefix>email</mat-icon>
+            @if(isCtrlInvalid('email') && signUpForm.get('email')?.touched){
+              <mat-error>
+                Please enter a valid email
+              </mat-error>
+            }
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+            <mat-icon matPrefix>lock</mat-icon>
+            <button mat-icon-button type="button" matSuffix (click)="hidePassword = !hidePassword" 
+                    [attr.aria-label]="'Hide password'" 
+                    [attr.aria-pressed]="hidePassword">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            @if(isCtrlInvalid('password') && signUpForm.get('password')?.touched){
+              <mat-error>
+                Please enter a valid password (min 5 letters)
+              </mat-error>
+            }
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" formControlName="confirmPassword">
+            <mat-icon matPrefix>lock</mat-icon>
+            @if(signUpForm.errors?.['passwordMismatch'] && signUpForm.get('confirmPassword')?.touched && signUpForm.get('confirmPassword')?.value){
+              <mat-error>
+                Password mismatch, please try again
+              </mat-error>
+            }
+          </mat-form-field>
+  
+          <div class="error-list">
+            @if(checkErrorMessage()){
+              <li>
+                {{errorMessage}}
+              </li>
+            }
+          </div>
+  
+          <div class="button-row">
+            <button mat-raised-button color="primary" type="submit" [disabled]="disableButton()">Sign Up</button>
+          </div>
+        </form>
+      </mat-card-content>
+  
+      <mat-card-actions class="back-button">
+        <button mat-stroked-button color="accent" [routerLink]="['/']">
+          <mat-icon>arrow_back</mat-icon> Back to Login
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  

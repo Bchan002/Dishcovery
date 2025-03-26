@@ -1,0 +1,34 @@
+.price-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    flex: 1 1 calc(50% - 8px);
+    min-width: 120px;
+  }
+  
+  @media (max-width: 600px) {
+    .price-inputs {
+      flex-direction: column;
+      gap: 12px;
+    }
+  
+    mat-form-field {
+      width: 100%;
+    }
+  }
+  
+  .range-error {
+    color: #f44336;
+    font-size: 13px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  
+  
+  

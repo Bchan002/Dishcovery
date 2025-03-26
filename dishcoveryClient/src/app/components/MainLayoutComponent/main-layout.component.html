@@ -1,0 +1,260 @@
+<div class="app-container" [class.sidebar-collapsed]="sidebarCollapsed"
+    [class.sidebar-hidden]="isMobileView && !sidebarOpen">
+
+    <!-- Sidebar -->
+    <div class="sidebar" [class.collapsed]="sidebarCollapsed">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header">
+            <div class="logo-container">
+                @if(!sidebarCollapsed){
+                <span class="logo-text">Dishcovery</span>
+                }
+                @if(sidebarCollapsed){
+                <span class="logo-icon">D</span>
+                }
+            </div>
+            @if(!isMobileView){
+            <button mat-icon-button class="toggle-sidebar-btn" (click)="toggleSidebar()">
+                <mat-icon>{{ sidebarCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+            </button>
+            }
+
+            @if(isMobileView){
+            <button mat-icon-button class="close-sidebar-btn" (click)="toggleMobileSidebar()">
+                <mat-icon>close</mat-icon>
+            </button>
+            }
+        </div>
+        <!-- Sidebar Content -->
+        <div class="sidebar-content">
+            <div class="user-info" [class.collapsed]="sidebarCollapsed">
+                <div class="user-avatar">
+                    <mat-icon>account_circle</mat-icon>
+                </div>
+                @if(!sidebarCollapsed){
+                <div class="user-details">
+                    <h4 class="user-name">{{ username }}</h4>
+                    <p class="user-role">User</p>
+                </div>
+                }
+
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="menu-container">
+                @if(!sidebarCollapsed){
+                <div class="menu-category">
+                    <span class="category-label">MAIN MENU</span>
+                </div>
+                }
+
+
+                <!-- Menu Items -->
+                <div class="menu-items">
+                    <!--Dashboard-->
+                    <a mat-list-item [routerLink]="['/layout/dashboard']" class="menu-item">
+                        <mat-icon>dashboard</mat-icon>
+                        @if(!sidebarCollapsed){
+                        <span class="item-label">Dashboard</span>
+                        }
+                    </a>
+
+                    <!--Recipes-->
+                    <a mat-list-item (click)="toggleRecipeDropdown()" class="menu-item">
+                        <mat-icon>restaurant_menu</mat-icon>
+                        @if(!sidebarCollapsed){
+                        <span class="item-label">Recipes</span>
+                        <mat-icon class="dropdown-icon">
+                            {{ recipeDropdownOpen ? 'expand_less' : 'expand_more' }}
+                        </mat-icon>
+                        }
+                    </a>
+
+                    <!-- Dropdown menu for recipes -->
+                    @if(recipeDropdownOpen){
+                    <div class="submenu">
+                        <a mat-list-item [routerLink]="['/layout/searchRecipe']" class="submenu-item">
+                            <mat-icon>search</mat-icon>
+                            <span class="item-label">Search Recipes</span>
+                        </a>
+                        <a mat-list-item [routerLink]="['/layout/recipeBreakfast']" class="submenu-item">
+                            <mat-icon>breakfast_dining</mat-icon>
+                            <span class="item-label">Breakfast</span>
+                        </a>
+                        <a mat-list-item [routerLink]="['/layout/recipeLunch']" class="submenu-item">
+                            <mat-icon>lunch_dining</mat-icon>
+                            <span class="item-label">Lunch</span>
+                        </a>
+                        <a mat-list-item [routerLink]="['/layout/recipeDinner']" class="submenu-item">
+                            <mat-icon>dinner_dining</mat-icon>
+                            <span class="item-label">Dinner</span>
+                        </a>
+                        <!--Saved Recipes-->
+                        <a mat-list-item [routerLink]="['/layout/savedRecipes']" class="menu-item">
+                            <mat-icon>event_note</mat-icon>
+                            @if(!sidebarCollapsed){
+                            <span class="item-label" *ngIf="!sidebarCollapsed">View Saved Recipes</span>
+                            }
+                        </a>
+                    </div>
+                    }
+
+                    <!--Grocery List -->
+                    <a mat-list-item (click)="toggleGroceryDropdown()" class="menu-item">
+                        <mat-icon>shopping_cart</mat-icon>
+                        @if(!sidebarCollapsed){
+                        <span class="item-label">Home Grocery</span>
+                        <mat-icon class="dropdown-icon">
+                            {{ groceryListDropdownOpen ? 'expand_less' : 'expand_more' }}
+                        </mat-icon>
+                        }
+                    </a>
+
+                    <!-- Dropdown menu for Grocery-->
+                    @if(groceryListDropdownOpen){
+                    <div class="submenu">
+                        <a mat-list-item [routerLink]="['/layout/addGrocery']" class="submenu-item">
+                            <mat-icon>playlist_add</mat-icon>
+                            <span class="item-label">Add to List</span>
+                        </a>
+                        <a mat-list-item [routerLink]="['/layout/groceryStore']" class="submenu-item">
+                            <mat-icon>checklist</mat-icon>
+                            <span class="item-label">My Grocery Store</span>
+                        </a>
+                    </div>
+                    }
+
+
+                    <!--Shopping List-->
+                    <a mat-list-item (click)="toggleShoppingListDropdown()" class="menu-item">
+                        <mat-icon>shopping_cart</mat-icon>
+                        @if(!sidebarCollapsed){
+                        <span class="item-label">Shopping List</span>
+                        <mat-icon class="dropdown-icon">
+                            {{ groceryListDropdownOpen ? 'expand_less' : 'expand_more' }}
+                        </mat-icon>
+                        }
+                    </a>
+
+                    <!-- Dropdown menu for Grocery-->
+                    @if(shoppingListDropdownOpen){
+                    <div class="submenu">
+                        <a mat-list-item [routerLink]="['/layout/shoppingList']" class="submenu-item">
+                            <mat-icon>playlist_add</mat-icon>
+                            <span class="item-label">My Shopping List</span>
+                        </a>
+                    </div>
+                    }
+
+                    <div class="menu-category" *ngIf="!sidebarCollapsed">
+                        <span class="category-label">SETTINGS</span>
+                    </div>
+
+                    <a mat-list-item (click)="openChangePasswordModal()" class="menu-item">
+                        <mat-icon>person</mat-icon>
+                        <span class="item-label" *ngIf="!sidebarCollapsed">Change Password</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <!-- <div class="theme-toggle" *ngIf="!sidebarCollapsed">
+                <button mat-icon-button (click)="toggleTheme()">
+                    <mat-icon>{{ isDarkTheme ? 'light_mode' : 'dark_mode' }}</mat-icon>
+                </button>
+                <span>{{ isDarkTheme ? 'Light Mode' : 'Dark Mode' }}</span>
+            </div> -->
+            <!-- <button mat-icon-button *ngIf="sidebarCollapsed" (click)="toggleTheme()">
+                <mat-icon>{{ isDarkTheme ? 'light_mode' : 'dark_mode' }}</mat-icon>
+            </button> -->
+
+            <button mat-flat-button color="warn" class="logout-btn" *ngIf="!sidebarCollapsed" (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Logout</span>
+            </button>
+            <button mat-icon-button color="warn" *ngIf="sidebarCollapsed" (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Navbar -->
+        <mat-toolbar color="primary" class="navbar">
+            <div class="navbar-left">
+                <button mat-icon-button class="menu-toggle-btn" (click)="toggleMobileSidebar()" *ngIf="isMobileView">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <h1 class="page-title">{{ pageTitle }}</h1>
+            </div>
+
+            <div class="navbar-right">
+                <button mat-icon-button [matMenuTriggerFor]="notificationsMenu" class="notification-btn">
+                    <mat-icon [matBadge]="notifications.length" matBadgeColor="accent" aria-hidden="false">
+                        notifications
+                    </mat-icon>
+                </button>
+
+
+                <button mat-icon-button [matMenuTriggerFor]="userMenu" class="user-menu-btn">
+                    <mat-icon>account_circle</mat-icon>
+                </button>
+            </div>
+        </mat-toolbar>
+
+        <!-- Page Content -->
+        <div class="page-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+    <!-- Overlay for mobile when sidebar is open -->
+    <div class="sidebar-overlay" *ngIf="isMobileView && sidebarOpen" (click)="toggleMobileSidebar()"></div>
+</div>
+
+<!-- Menus -->
+<mat-menu #notificationsMenu="matMenu" class="notifications-menu">
+    <div class="notification-header">
+        <h3>Notifications</h3>
+        <button mat-button color="primary" (click)="clearNotifications()">Mark all as read</button>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="notification-items">
+        @if(notifications.length<=0){ <div class="notification-content">
+            <p>No notifications</p>
+    </div>
+    } @else {
+
+    @for(notification of notifications; let idx=$index;track idx){
+    <button mat-menu-item class="notification-item">
+        <mat-icon color="primary" aria-hidden="false">restaurant_menu</mat-icon>
+        <div class="notification-content">
+            <p class="notification-title">{{ notification.title }}</p>
+            <p class="notification-desc">{{ notification.body }}</p>
+            <p class="notification-time">{{ notification.time }}</p>
+        </div>
+    </button>
+    }
+    }
+    </div>
+
+    <mat-divider></mat-divider>
+    <button mat-menu-item class="see-all-btn" *ngIf="notifications.length">
+        <span>See All Notifications</span>
+        <mat-icon>arrow_right_alt</mat-icon>
+    </button>
+</mat-menu>
+
+
+<mat-menu #userMenu="matMenu">
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+    </button>
+</mat-menu>
